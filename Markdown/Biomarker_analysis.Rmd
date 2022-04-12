@@ -1,0 +1,90 @@
+---
+title: "Biomarker_analysis"
+author: "Mathilde Thrysøe Jespersen"
+date: '2022-04-12'
+output: html_document
+---
+
+```{r, echo =FALSE, warning = FALSE, message = FALSE}
+
+#ANOVA-test:
+
+
+#ANOVA-test nfl
+load(here::here("data/NCS_biomark.rda"))
+
+library(tidyverse)
+
+attach(NCS_biomark)
+test.aov.NfL <- aov(NfL ~ DSPN_dia, data = NCS_biomark)
+summary(test.aov.NfL)
+
+TukeyHSD(test.aov.NfL)
+
+n_NfL<-aggregate(NCS_biomark$NfL~NCS_biomark$DSPN_dia, FUN=length)
+mean_NfL<-aggregate(NCS_biomark$NfL,by=list(NCS_biomark$DSPN_dia),FUN=mean, na.rm=TRUE)
+sds_NfL<-aggregate(NCS_biomark$NfL~NCS_biomark$DSPN_dia, FUN=sd)
+min_NfL<-aggregate(NCS_biomark$NfL,by=list(NCS_biomark$DSPN_dia),FUN=min, na.rm=TRUE)
+max_NfL<-aggregate(NCS_biomark$NfL,by=list(NCS_biomark$DSPN_dia),FUN=max, na.rm=TRUE)
+myResults_NfL<-cbind(n_NfL, mean_NfL, min_NfL, max_NfL, sds_NfL)
+colnames(myResults_NfL)<-c("diabetes and neuropathy status","n","mean","range","st.dev.")
+myResults_NfL
+
+
+#ANOVA-test B12
+
+attach(NCS_biomark)
+test.aov.b12 <- aov(B12 ~ DSPN_dia, data = NCS_biomark)
+summary(test.aov.b12)
+
+TukeyHSD(test.aov.b12)
+
+n_b12<-aggregate(NCS_biomark$B12~NCS_biomark$DSPN_dia, FUN=length)
+mean_b12<-aggregate(NCS_biomark$B12,by=list(NCS_biomark$DSPN_dia),FUN=mean, na.rm=TRUE)
+sds_b12<-aggregate(NCS_biomark$B12~NCS_biomark$DSPN_dia, FUN=sd)
+min_b12<-aggregate(NCS_biomark$B12,by=list(NCS_biomark$DSPN_dia), FUN=min, na.rm=TRUE)
+max_b12<-aggregate(NCS_biomark$B12,by=list(NCS_biomark$DSPN_dia), FUN=max, na.rm=TRUE)
+myResults_b12<-cbind(n_b12, mean_b12, min_b12, max_b12, sds_b12)
+colnames(myResults_b12)<-c("diabetes and neuropathy status","n","mean","min", "max","st.dev.")
+myResults_b12
+
+
+#ANOVA-test MMA
+
+NCS_biomark$MMA <- as.numeric(MMA)
+                                
+attach(NCS_biomark)
+test.aov.mma <- aov(MMA ~ DSPN_dia, data = NCS_biomark)
+summary(test.aov.mma)
+
+TukeyHSD(test.aov.mma)
+
+n_mma<-aggregate(NCS_biomark$MMA~NCS_biomark$DSPN_dia, FUN=length)
+mean_mma<-aggregate(NCS_biomark$MMA,by=list(NCS_biomark$DSPN_dia),FUN=mean, na.rm=TRUE)
+sds_mma<-aggregate(NCS_biomark$MMA~NCS_biomark$DSPN_dia, FUN=sd)
+min_mma<-aggregate(NCS_biomark$MMA,by=list(NCS_biomark$DSPN_dia), FUN=min, na.rm=TRUE)
+max_mma<-aggregate(NCS_biomark$MMA,by=list(NCS_biomark$DSPN_dia), FUN=max, na.rm=TRUE)
+myResults_mma<-cbind(n_mma, mean_mma, min_mma, max_mma, sds_mma)
+colnames(myResults_mma)<-c("diabetes and neuropathy status","n","mean","min", "max","st.dev.")
+myResults_mma
+
+#ANOVA-test holoTC
+
+
+attach(NCS_biomark)
+test.aov.holotc <- aov(holoTC ~ DSPN_dia, data = NCS_biomark)
+summary(test.aov.holotc)
+
+TukeyHSD(test.aov.holotc)
+
+n_holo<-aggregate(NCS_biomark$holoTC~NCS_biomark$DSPN_dia, FUN=length)
+mean_holo<-aggregate(NCS_biomark$holoTC,by=list(NCS_biomark$DSPN_dia),FUN=mean, na.rm=TRUE)
+sds_holo<-aggregate(NCS_biomark$holoTC~NCS_biomark$DSPN_dia, FUN=sd)
+min_holo<-aggregate(NCS_biomark$holoTC,by=list(NCS_biomark$DSPN_dia), FUN=min, na.rm=TRUE)
+max_holo<-aggregate(NCS_biomark$holoTC,by=list(NCS_biomark$DSPN_dia), FUN=max, na.rm=TRUE)
+myResults_holo<-cbind(n_holo, mean_holo, min_holo, max_holo, sds_holo)
+colnames(myResults_holo)<-c("diabetes and neuropathy status","n","mean","min", "max","st.dev.")
+myResults_holo
+
+```
+
