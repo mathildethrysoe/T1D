@@ -87,4 +87,28 @@ colnames(myResults_holo)<-c("diabetes and neuropathy status","n","mean","min", "
 myResults_holo
 
 ```
+```{r}
+
+#Median(range) tabel 
+
+load(here::here("data/med_rang.rda"))
+
+library(tidyverse)
+library(kableExtra)
+library(flextable)
+
+
+ft_med_rang <- flextable(med_rang, cwidth=1.5,
+  cheight = 0.25) %>% 
+    set_caption(caption = "Table 3: Concentration of plasma biomarkers in participants with Type 1 diabetes and neuropathy, with Type 1 diabetes without neuropathy and in control group") %>% 
+    theme_vanilla() %>% 
+    add_footer_lines("Median(range). *ANOVA-test") %>% 
+    color(part = "footer", color = "#666666") %>% 
+    bold(i=1, j="p*") %>% 
+    bold(i=3, j="p*") %>% 
+    autofit() 
+    
+
+ft_med_rang
+```
 
