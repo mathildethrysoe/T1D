@@ -36,11 +36,11 @@ diabrisk$DSPN_dia <- factor(diabrisk$DSPN_dia,
                                levels = c(1,2),
                                labels = c("No neuropathy", "Neuropathy"))
 
-riskfactor_diab <- rename(diabrisk, Age = age, HbA1c = hba1c, "HbA1c mean 5 yrs" = hba1c_mean5yrs, "Total daily insulin"=total_daily_insulin, "Time in range"=TIR, "Diabetes duration" = DD, "SBP" = sysBT, "DBP" = diaBT, Retinopathy = retinopathy, Nephropathy = nephropathy, Smoking = smoking, Alcohol = alcohol, Activity = activity, Pulse = pulse, Diabetes = diabetes,  "Tanner" = tanner, "Hip circumference" = hip, "Waist circumference" = waist, Cholesterol = cholesterol, Triglycerids = triglycerids, "Diabetes and neuropathy status"=DSPN_dia, "Gender (female)" = gender, "Basal insulin" = basal_insulin, "Time in hypoglycemia" = time_hypo)
+riskfactor_diab <- rename(diabrisk, Age = age, HbA1c = hba1c, "HbA1c mean 5 yrs" = hba1c_mean5yrs, "Total daily insulin"=total_daily_insulin, "Time in range"=TIR, "Diabetes duration" = DD, "SBP" = sysBT, "DBP" = diaBT, Retinopathy = retinopathy, Nephropathy = nephropathy, Smoking = smoking, Alcohol = alcohol, Activity = activity, Pulse = pulse, Diabetes = diabetes,  "Tanner" = tanner, "Hip circumference" = hip, "Waist circumference" = waist, Cholesterol = cholesterol, Triglycerids = triglycerids, "Diabetes and neuropathy status"=DSPN_dia, "Gender (female)" = gender, "Basal insulin" = basal_insulin, "Time in hypoglycemia" = time_hypo, Height = height)
 
 
 riskfactor_diab %>% 
-    select("Diabetes and neuropathy status", "Gender (female)", Age, "Diabetes duration", HbA1c, "HbA1c mean 5 yrs", "Time in range", "Time in hypoglycemia", "Basal insulin", "Total daily insulin", BMI, "Hip circumference", "Waist circumference", Tanner, SBP, DBP, Pulse, Retinopathy, Nephropathy, Cholesterol, LDL, HDL, Triglycerids, Alcohol, Smoking, Activity) %>% 
+    select("Diabetes and neuropathy status", "Gender (female)", Age, "Diabetes duration", HbA1c, "HbA1c mean 5 yrs", "Time in range", "Time in hypoglycemia", "Basal insulin", "Total daily insulin", BMI, Height, "Hip circumference", "Waist circumference", Tanner, SBP, DBP, Pulse, Retinopathy, Nephropathy, Cholesterol, LDL, HDL, Triglycerids, Alcohol, Smoking, Activity) %>% 
     tbl_summary(by = "Diabetes and neuropathy status", missing = "no", statistic = list(all_continuous() ~ "{mean} ({sd})"), type = list("Gender (female)" ~ "dichotomous"), value = list("Gender (female)" ~ "female")) %>%
     add_p() %>% 
     modify_header(label ~ "**Variable**") %>% 
