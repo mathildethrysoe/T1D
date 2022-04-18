@@ -37,7 +37,7 @@ riskfactors1 <- rename(riskfactors1, "Gender (female)" = gender)
 riskfactors1$Diabetes<- factor(riskfactors1$Diabetes,
                                 levels = c("No", "Yes"),
                                 labels = c("Controls", "Diabetes"))
-riskfactors1 %>% 
+t1<-riskfactors1 %>% 
     select(Diabetes, "Gender (female)", Age, "Diabetes duration", HbA1c, BMI, Height, "Hip circumference", "Waist circumference", Tanner, SBP, DBP, Pulse, Retinopathy, Nephropathy, Cholesterol, LDL, HDL, Triglycerids, Alcohol, Smoking, Activity) %>% 
     tbl_summary(by = Diabetes, missing = "no", statistic = list(all_continuous() ~ "{mean} ({sd})"), type = list("Gender (female)" ~ "dichotomous"), value = list("Gender (female)" ~ "female")) %>% 
     add_p() %>% 
@@ -55,7 +55,7 @@ riskfactors1 %>%
     line_spacing(space = 1, part = "footer") %>% 
      autofit(add_w = 0, add_h = 0)
  
-
+t1
 ```
 
 

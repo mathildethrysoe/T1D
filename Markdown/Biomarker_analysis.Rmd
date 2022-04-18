@@ -2,7 +2,9 @@
 title: "Biomarker_analysis"
 author: "Mathilde Thrysøe Jespersen"
 date: '2022-04-12'
-output: html_document
+output:
+  html_document: default
+  word_document: default
 ---
 
 ```{r, echo =FALSE, warning = FALSE, message = FALSE}
@@ -112,7 +114,7 @@ ft_med_rang <- flextable(med_rang, cwidth=1.5,
 ft_med_rang
 ```
 
-```{r}
+```{r, echo =FALSE, warning = FALSE, message = FALSE}
 
 #Box plot for NfL med logistisk y-akse
 load(here::here("data/NCS_biomark.rda"))
