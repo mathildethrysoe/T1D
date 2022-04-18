@@ -112,3 +112,78 @@ ft_med_rang <- flextable(med_rang, cwidth=1.5,
 ft_med_rang
 ```
 
+```{r}
+
+#Box plot for NfL med logistisk y-akse
+load(here::here("data/NCS_biomark.rda"))
+
+library(tidyverse)
+require(scales)
+
+NCS_biomark_tidied <- NCS_biomark %>% 
+    filter(!is.na(DSPN_dia))
+
+ggplot(NCS_biomark_tidied, aes(x = DSPN_dia, y = NfL, fill = DSPN_dia)) +
+    geom_boxplot(na.rm  = TRUE) +
+    theme_classic() +
+    labs(title = "Box plot", x = "Diabetes and neuropathy status", y = "log plasma NfL-level (ng/l)") + 
+    labs(subtitle = "The concentration of plasma NfL in patients with Type 1 diabetes with and without neuropathy and in control participants")+
+    stat_boxplot(geom="errorbar", width = 0.2) +
+      scale_fill_viridis_d(option = "inferno", alpha = 0.5, name="Groups", labels=c("Controls","T1D w/o DN","T1D with DN"))+
+      theme(axis.text.x = element_blank())+
+    theme(legend.position = "bottom", legend.title = element_text(face = "bold"))+
+    scale_y_continuous(trans = log2_trans(),
+    breaks = trans_breaks("log2", function(x) 2^x),
+    labels = trans_format("log2", math_format(2^.x)))
+
+#Box plot for NfL uden logistisk y-akse
+ggplot(NCS_biomark_tidied, aes(x = DSPN_dia, y = NfL, fill = DSPN_dia)) +
+    geom_boxplot(na.rm  = TRUE) +
+    theme_classic() +
+    labs(title = "Box plot", x = "Diabetes and neuropathy status", y = "plasma NfL-level (ng/l)") + 
+    labs(subtitle = "The concentration of plasma NfL in patients with Type 1 diabetes with and without neuropathy and in control participants")+
+    stat_boxplot(geom="errorbar", width = 0.2) +
+      scale_fill_viridis_d(option = "inferno", alpha = 0.5, name="Groups", labels=c("Controls","T1D w/o DN","T1D with DN"))+
+      theme(axis.text.x = element_blank())+
+    theme(legend.position = "bottom", legend.title = element_text(face = "bold"))
+
+
+#Boxplot for B12 
+ggplot(NCS_biomark_tidied, aes(x = DSPN_dia, y = B12, fill = DSPN_dia)) +
+    geom_boxplot(na.rm  = TRUE) +
+    theme_classic() +
+    labs(title = "Box plot", x = "Diabetes and neuropathy status", y = "plasma B12-level (pmol/l)") + 
+    labs(subtitle = "The concentration of plasma B12 in patients with Type 1 diabetes with and without neuropathy and in control participants")+
+    stat_boxplot(geom="errorbar", width = 0.2) +
+      scale_fill_viridis_d(option = "mako", alpha = 0.5, name="Groups", labels=c("Controls","T1D w/o DN","T1D with DN"))+
+      theme(axis.text.x = element_blank())+
+    theme(legend.position = "bottom", legend.title = element_text(face = "bold"))
+
+
+#Boxplot for MMA
+
+attach((NCS_biomark_tidied))
+NCS_biomark_tidied$MMA <- as.numeric(MMA)
+ggplot(NCS_biomark_tidied, aes(x = DSPN_dia, y = MMA, fill = DSPN_dia)) +
+    geom_boxplot(na.rm  = TRUE) +
+    theme_classic() +
+    labs(title = "Box plot", x = "Diabetes and neuropathy status", y = "plasma MMA-level (umol/l)") + 
+    labs(subtitle = "The concentration of plasma MMA in patients with Type 1 diabetes with and without neuropathy and in control participants")+
+    stat_boxplot(geom="errorbar", width = 0.2) +
+      scale_fill_viridis_d(option = "rocket", alpha = 0.5, name="Groups", labels=c("Controls","T1D w/o DN","T1D with DN"))+
+      theme(axis.text.x = element_blank())+
+    theme(legend.position = "bottom", legend.title = element_text(face = "bold"))
+
+
+#Boxplot for holoTC
+ggplot(NCS_biomark_tidied, aes(x = DSPN_dia, y = holoTC, fill = DSPN_dia)) +
+    geom_boxplot(na.rm  = TRUE) +
+    theme_classic() +
+    labs(title = "Box plot", x = "Diabetes and neuropathy status", y = "plasma holoTC-level (pmol/l)") + 
+    labs(subtitle = "The concentration of plasma holoTC in patients with Type 1 diabetes with and without neuropathy and in control participants")+
+    stat_boxplot(geom="errorbar", width = 0.2) +
+      scale_fill_viridis_d(option = "turbo", alpha = 0.5, name="Groups", labels=c("Controls","T1D w/o DN","T1D with DN"))+
+      theme(axis.text.x = element_blank())+
+    theme(legend.position = "bottom", legend.title = element_text(face = "bold"))
+```
+
