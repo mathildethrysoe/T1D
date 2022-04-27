@@ -13,21 +13,21 @@ output:
 
 
 #ANOVA-test nfl
-load(here::here("data/NCS_biomark.rda"))
+load(here::here("data/NCS_biomark_2_1.rda"))
 
 library(tidyverse)
 
-attach(NCS_biomark)
-test.aov.NfL <- aov(NfL ~ DSPN_dia, data = NCS_biomark)
+attach(NCS_biomark_2_1)
+test.aov.NfL <- aov(NfL ~ DSPN_dia, data = NCS_biomark_2_1)
 summary(test.aov.NfL)
 
 TukeyHSD(test.aov.NfL)
 
-n_NfL<-aggregate(NCS_biomark$NfL~NCS_biomark$DSPN_dia, FUN=length)
-mean_NfL<-aggregate(NCS_biomark$NfL,by=list(NCS_biomark$DSPN_dia),FUN=mean, na.rm=TRUE)
-sds_NfL<-aggregate(NCS_biomark$NfL~NCS_biomark$DSPN_dia, FUN=sd)
-min_NfL<-aggregate(NCS_biomark$NfL,by=list(NCS_biomark$DSPN_dia),FUN=min, na.rm=TRUE)
-max_NfL<-aggregate(NCS_biomark$NfL,by=list(NCS_biomark$DSPN_dia),FUN=max, na.rm=TRUE)
+n_NfL<-aggregate(NCS_biomark_2_1$NfL~NCS_biomark_2_1$DSPN_dia, FUN=length)
+mean_NfL<-aggregate(NCS_biomark_2_1$NfL,by=list(NCS_biomark_2_1$DSPN_dia),FUN=mean, na.rm=TRUE)
+sds_NfL<-aggregate(NCS_biomark_2_1$NfL~NCS_biomark_2_1$DSPN_dia, FUN=sd)
+min_NfL<-aggregate(NCS_biomark_2_1$NfL,by=list(NCS_biomark_2_1$DSPN_dia),FUN=min, na.rm=TRUE)
+max_NfL<-aggregate(NCS_biomark_2_1$NfL,by=list(NCS_biomark_2_1$DSPN_dia),FUN=max, na.rm=TRUE)
 myResults_NfL<-cbind(n_NfL, mean_NfL, min_NfL, max_NfL, sds_NfL)
 colnames(myResults_NfL)<-c("diabetes and neuropathy status","n","mean","range","st.dev.")
 myResults_NfL
@@ -35,17 +35,17 @@ myResults_NfL
 
 #ANOVA-test B12
 
-attach(NCS_biomark)
-test.aov.b12 <- aov(B12 ~ DSPN_dia, data = NCS_biomark)
+attach(NCS_biomark_2_1)
+test.aov.b12 <- aov(B12 ~ DSPN_dia, data = NCS_biomark_2_1)
 summary(test.aov.b12)
 
 TukeyHSD(test.aov.b12)
 
-n_b12<-aggregate(NCS_biomark$B12~NCS_biomark$DSPN_dia, FUN=length)
-mean_b12<-aggregate(NCS_biomark$B12,by=list(NCS_biomark$DSPN_dia),FUN=mean, na.rm=TRUE)
-sds_b12<-aggregate(NCS_biomark$B12~NCS_biomark$DSPN_dia, FUN=sd)
-min_b12<-aggregate(NCS_biomark$B12,by=list(NCS_biomark$DSPN_dia), FUN=min, na.rm=TRUE)
-max_b12<-aggregate(NCS_biomark$B12,by=list(NCS_biomark$DSPN_dia), FUN=max, na.rm=TRUE)
+n_b12<-aggregate(NCS_biomark_2_1$B12~NCS_biomark_2_1$DSPN_dia, FUN=length)
+mean_b12<-aggregate(NCS_biomark_2_1$B12,by=list(NCS_biomark_2_1$DSPN_dia),FUN=mean, na.rm=TRUE)
+sds_b12<-aggregate(NCS_biomark_2_1$B12~NCS_biomark_2_1$DSPN_dia, FUN=sd)
+min_b12<-aggregate(NCS_biomark_2_1$B12,by=list(NCS_biomark_2_1$DSPN_dia), FUN=min, na.rm=TRUE)
+max_b12<-aggregate(NCS_biomark_2_1$B12,by=list(NCS_biomark_2_1$DSPN_dia), FUN=max, na.rm=TRUE)
 myResults_b12<-cbind(n_b12, mean_b12, min_b12, max_b12, sds_b12)
 colnames(myResults_b12)<-c("diabetes and neuropathy status","n","mean","min", "max","st.dev.")
 myResults_b12
@@ -53,19 +53,19 @@ myResults_b12
 
 #ANOVA-test MMA
 
-NCS_biomark$MMA <- as.numeric(MMA)
+NCS_biomark_2_1$MMA <- as.numeric(MMA)
                                 
-attach(NCS_biomark)
-test.aov.mma <- aov(MMA ~ DSPN_dia, data = NCS_biomark)
+attach(NCS_biomark_2_1)
+test.aov.mma <- aov(MMA ~ DSPN_dia, data = NCS_biomark_2_1)
 summary(test.aov.mma)
 
 TukeyHSD(test.aov.mma)
 
-n_mma<-aggregate(NCS_biomark$MMA~NCS_biomark$DSPN_dia, FUN=length)
-mean_mma<-aggregate(NCS_biomark$MMA,by=list(NCS_biomark$DSPN_dia),FUN=mean, na.rm=TRUE)
-sds_mma<-aggregate(NCS_biomark$MMA~NCS_biomark$DSPN_dia, FUN=sd)
-min_mma<-aggregate(NCS_biomark$MMA,by=list(NCS_biomark$DSPN_dia), FUN=min, na.rm=TRUE)
-max_mma<-aggregate(NCS_biomark$MMA,by=list(NCS_biomark$DSPN_dia), FUN=max, na.rm=TRUE)
+n_mma<-aggregate(NCS_biomark_2_1$MMA~NCS_biomark_2_1$DSPN_dia, FUN=length)
+mean_mma<-aggregate(NCS_biomark_2_1$MMA,by=list(NCS_biomark_2_1$DSPN_dia),FUN=mean, na.rm=TRUE)
+sds_mma<-aggregate(NCS_biomark_2_1$MMA~NCS_biomark_2_1$DSPN_dia, FUN=sd)
+min_mma<-aggregate(NCS_biomark_2_1$MMA,by=list(NCS_biomark_2_1$DSPN_dia), FUN=min, na.rm=TRUE)
+max_mma<-aggregate(NCS_biomark_2_1$MMA,by=list(NCS_biomark_2_1$DSPN_dia), FUN=max, na.rm=TRUE)
 myResults_mma<-cbind(n_mma, mean_mma, min_mma, max_mma, sds_mma)
 colnames(myResults_mma)<-c("diabetes and neuropathy status","n","mean","min", "max","st.dev.")
 myResults_mma
@@ -73,17 +73,17 @@ myResults_mma
 #ANOVA-test holoTC
 
 
-attach(NCS_biomark)
-test.aov.holotc <- aov(holoTC ~ DSPN_dia, data = NCS_biomark)
+attach(NCS_biomark_2_1)
+test.aov.holotc <- aov(holoTC ~ DSPN_dia, data = NCS_biomark_2_1)
 summary(test.aov.holotc)
 
 TukeyHSD(test.aov.holotc)
 
-n_holo<-aggregate(NCS_biomark$holoTC~NCS_biomark$DSPN_dia, FUN=length)
-mean_holo<-aggregate(NCS_biomark$holoTC,by=list(NCS_biomark$DSPN_dia),FUN=mean, na.rm=TRUE)
-sds_holo<-aggregate(NCS_biomark$holoTC~NCS_biomark$DSPN_dia, FUN=sd)
-min_holo<-aggregate(NCS_biomark$holoTC,by=list(NCS_biomark$DSPN_dia), FUN=min, na.rm=TRUE)
-max_holo<-aggregate(NCS_biomark$holoTC,by=list(NCS_biomark$DSPN_dia), FUN=max, na.rm=TRUE)
+n_holo<-aggregate(NCS_biomark_2_1$holoTC~NCS_biomark_2_1$DSPN_dia, FUN=length)
+mean_holo<-aggregate(NCS_biomark_2_1$holoTC,by=list(NCS_biomark_2_1$DSPN_dia),FUN=mean, na.rm=TRUE)
+sds_holo<-aggregate(NCS_biomark_2_1$holoTC~NCS_biomark_2_1$DSPN_dia, FUN=sd)
+min_holo<-aggregate(NCS_biomark_2_1$holoTC,by=list(NCS_biomark_2_1$DSPN_dia), FUN=min, na.rm=TRUE)
+max_holo<-aggregate(NCS_biomark_2_1$holoTC,by=list(NCS_biomark_2_1$DSPN_dia), FUN=max, na.rm=TRUE)
 myResults_holo<-cbind(n_holo, mean_holo, min_holo, max_holo, sds_holo)
 colnames(myResults_holo)<-c("diabetes and neuropathy status","n","mean","min", "max","st.dev.")
 myResults_holo
@@ -93,21 +93,20 @@ myResults_holo
 
 #Median(range) tabel 
 
-load(here::here("data/med_rang.rda"))
+load(here::here("data/med_rang_2_1.rda"))
 
 library(tidyverse)
 library(kableExtra)
 library(flextable)
 
 
-ft_med_rang <- flextable(med_rang, cwidth=1.5,
+ft_med_rang <- flextable(med_rang_2_1, cwidth=1.5,
   cheight = 0.25) %>% 
     set_caption(caption = "Table 3: Concentration of plasma biomarkers in participants with Type 1 diabetes and neuropathy, with Type 1 diabetes without neuropathy and in control group") %>% 
     theme_vanilla() %>% 
     add_footer_lines("Median(range). *ANOVA-test") %>% 
     color(part = "footer", color = "#666666") %>% 
     bold(i=1, j="p*") %>% 
-    bold(i=3, j="p*") %>% 
     autofit() 
     
 
@@ -117,49 +116,64 @@ ft_med_rang
 ```{r, echo =FALSE, warning = FALSE, message = FALSE}
 
 #Box plot for NfL med logistisk y-akse
-load(here::here("data/NCS_biomark.rda"))
+load(here::here("data/NCS_biomark_2_1.rda"))
 
 library(tidyverse)
 require(scales)
 
-NCS_biomark_tidied <- NCS_biomark %>% 
+NCS_biomark_tidied <-NCS_biomark_2_1 %>% 
     filter(!is.na(DSPN_dia))
 
 ggplot(NCS_biomark_tidied, aes(x = DSPN_dia, y = NfL, fill = DSPN_dia)) +
     geom_boxplot(na.rm  = TRUE) +
     theme_classic() +
-    labs(title = "Box plot", x = "Diabetes and neuropathy status", y = "log plasma NfL-level (ng/l)") + 
-    labs(subtitle = "The concentration of plasma NfL in patients with Type 1 diabetes with and without neuropathy and in control participants")+
+    labs(title = "Box plot", x = "", y = "log plasma NfL-level (ng/l)") + 
+    labs(subtitle = "d)")+
+   theme(plot.subtitle = element_text(face="bold", size=30))+
     stat_boxplot(geom="errorbar", width = 0.2) +
-      scale_fill_viridis_d(option = "inferno", alpha = 0.5, name="Groups", labels=c("Controls","T1D w/o DN","T1D with DN"))+
+      scale_fill_viridis_d(option = "mako", alpha = 0.5, name="Group", labels=c("Controls","T1D w/o DN","T1D with DN"))+
       theme(axis.text.x = element_blank())+
     theme(legend.position = "bottom", legend.title = element_text(face = "bold"))+
     scale_y_continuous(trans = log2_trans(),
     breaks = trans_breaks("log2", function(x) 2^x),
-    labels = trans_format("log2", math_format(2^.x)))
+    labels = trans_format("log2", math_format(2^.x)))+
+    theme(axis.title = element_text(size=18, hjust=0.6))+
+  theme(legend.text = element_text(size=20), legend.title = element_text(size=20))+
+  theme(axis.text.y = element_text(size=13))
+  
 
 #Box plot for NfL uden logistisk y-akse
 ggplot(NCS_biomark_tidied, aes(x = DSPN_dia, y = NfL, fill = DSPN_dia)) +
     geom_boxplot(na.rm  = TRUE) +
     theme_classic() +
-    labs(title = "Box plot", x = "Diabetes and neuropathy status", y = "plasma NfL-level (ng/l)") + 
-    labs(subtitle = "The concentration of plasma NfL in patients with Type 1 diabetes with and without neuropathy and in control participants")+
+    labs(title = "Box plot", x = "", y = "plasma NfL-level (ng/l)") + 
+    labs(subtitle = "d)")+
+   theme(plot.subtitle = element_text(face="bold", size=30))+
     stat_boxplot(geom="errorbar", width = 0.2) +
-      scale_fill_viridis_d(option = "inferno", alpha = 0.5, name="Groups", labels=c("Controls","T1D w/o DN","T1D with DN"))+
+      scale_fill_viridis_d(option = "mako", alpha = 0.5, name="Group", labels=c("Control","T1D w/o DN","T1D with DN"))+
       theme(axis.text.x = element_blank())+
-    theme(legend.position = "bottom", legend.title = element_text(face = "bold"))
+    theme(legend.position = "bottom", legend.title = element_text(face = "bold"))+
+  theme(axis.title = element_text(size=18, hjust=0.6))+
+  theme(legend.text = element_text(size=20), legend.title = element_text(size=20))+
+  theme(axis.text.y = element_text(size=13))
+  
 
 
 #Boxplot for B12 
 ggplot(NCS_biomark_tidied, aes(x = DSPN_dia, y = B12, fill = DSPN_dia)) +
     geom_boxplot(na.rm  = TRUE) +
     theme_classic() +
-    labs(title = "Box plot", x = "Diabetes and neuropathy status", y = "plasma B12-level (pmol/l)") + 
-    labs(subtitle = "The concentration of plasma B12 in patients with Type 1 diabetes with and without neuropathy and in control participants")+
+    labs(title = "Box plot", x = "", y = "plasma B12-level (pmol/l)") + 
+    labs(subtitle = "a)")+
+   theme(plot.subtitle = element_text(face="bold", size=30))+
     stat_boxplot(geom="errorbar", width = 0.2) +
-      scale_fill_viridis_d(option = "mako", alpha = 0.5, name="Groups", labels=c("Controls","T1D w/o DN","T1D with DN"))+
+      scale_fill_viridis_d(option = "mako", alpha = 0.5, name="Group", labels=c("Control","T1D w/o DN","T1D with DN"))+
       theme(axis.text.x = element_blank())+
-    theme(legend.position = "bottom", legend.title = element_text(face = "bold"))
+    theme(legend.position = "bottom", legend.title = element_text(face = "bold"))+
+  theme(axis.title = element_text(size=18, hjust=0.6))+
+  theme(legend.text = element_text(size=20), legend.title = element_text(size=20))+
+  theme(axis.text.y = element_text(size=13))
+  
 
 
 #Boxplot for MMA
@@ -169,23 +183,37 @@ NCS_biomark_tidied$MMA <- as.numeric(MMA)
 ggplot(NCS_biomark_tidied, aes(x = DSPN_dia, y = MMA, fill = DSPN_dia)) +
     geom_boxplot(na.rm  = TRUE) +
     theme_classic() +
-    labs(title = "Box plot", x = "Diabetes and neuropathy status", y = "plasma MMA-level (umol/l)") + 
-    labs(subtitle = "The concentration of plasma MMA in patients with Type 1 diabetes with and without neuropathy and in control participants")+
+    labs(title = "Box plot", x = "", y = "plasma MMA-level (\U003BC\ mol/l)") + 
+    labs(subtitle = "b)")+
+   theme(plot.subtitle = element_text(face="bold", size=30))+
     stat_boxplot(geom="errorbar", width = 0.2) +
-      scale_fill_viridis_d(option = "rocket", alpha = 0.5, name="Groups", labels=c("Controls","T1D w/o DN","T1D with DN"))+
+      scale_fill_viridis_d(option = "rocket", alpha = 0.5, name="Group", labels=c("Control","T1D w/o DN","T1D with DN"))+
       theme(axis.text.x = element_blank())+
-    theme(legend.position = "bottom", legend.title = element_text(face = "bold"))
+    theme(legend.position = "bottom", legend.title = element_text(face = "bold"))+
+  theme(axis.title = element_text(size=18, hjust=0.6))+
+  theme(legend.text = element_text(size=20), legend.title = element_text(size=20))+
+  theme(axis.text.y = element_text(size=13))
+  
 
 
 #Boxplot for holoTC
 ggplot(NCS_biomark_tidied, aes(x = DSPN_dia, y = holoTC, fill = DSPN_dia)) +
     geom_boxplot(na.rm  = TRUE) +
     theme_classic() +
-    labs(title = "Box plot", x = "Diabetes and neuropathy status", y = "plasma holoTC-level (pmol/l)") + 
-    labs(subtitle = "The concentration of plasma holoTC in patients with Type 1 diabetes with and without neuropathy and in control participants")+
+    labs(title = "Box plot", x = "", y = "plasma holoTC-level (pmol/l)") + 
+    labs(subtitle = "c)")+
+  theme(plot.subtitle = element_text(face="bold", size=30))+
     stat_boxplot(geom="errorbar", width = 0.2) +
-      scale_fill_viridis_d(option = "turbo", alpha = 0.5, name="Groups", labels=c("Controls","T1D w/o DN","T1D with DN"))+
+      scale_fill_viridis_d(option = "turbo", alpha = 0.5, name="Group", labels=c("Control","T1D w/o DN","T1D with DN"))+
       theme(axis.text.x = element_blank())+
-    theme(legend.position = "bottom", legend.title = element_text(face = "bold"))
+    theme(legend.position = "bottom", legend.title = element_text(face = "bold"))+
+  theme(axis.title = element_text(size=18, hjust=0.6))+
+  theme(legend.text = element_text(size=20), legend.title = element_text(size=20))+
+  theme(axis.text.y = element_text(size=13))
+  
+
+```
+
+```{r}
 ```
 

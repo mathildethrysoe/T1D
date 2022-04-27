@@ -1,71 +1,14 @@
 ---
-title: "Tabel_neuropathy_comparison"
+title: "Tabel_merged"
 author: "Mathilde Thrysøe Jespersen"
-date: '2022-04-12'
+date: '2022-04-18'
 output:
-  word_document: default
   html_document: default
+  word_document: default
 ---
 
 ```{r, echo =FALSE, warning = FALSE, message = FALSE}
 
-#Sammenligning af diabetes +% neuropati
-
-load(here::here("data/diabrisks_2_1.rda"))
-
-library(tidyverse)
-library(gtsummary)
-library(kableExtra)
-library(flextable)
-
-diabrisks_2_1$activity <- factor(diabrisks_2_1$activity,
-                                levels = c(0,1,2,3),
-                                labels = c("0 hrs/week", "1-3 hrs/week", "4-7 hrs/week", ">7 hrs/week"))
-
-
-diabrisks_2_1$smoking <- factor(diabrisks_2_1$smoking,
-                               levels = c(0,1,2,3),
-                               labels = c("Never", "Previous", "Smoke", "NI"))
-
-diabrisks_2_1$alcohol <- factor(diabrisks_2_1$alcohol,
-                               levels = c(0,1,2,3,4),
-                               labels = c("0 unit/week", "1-3 units/week", "4-7 units/week", "8-14 units/week", ">15 units/week"))
-                                 
-
-diabrisks_2_1$DSPN_dia <- factor(diabrisks_2_1$DSPN_dia,
-                               levels = c(1,2),
-                               labels = c("No neuropathy", "Neuropathy"))
-
-riskfactor_diab <- rename(diabrisks_2_1, Age = age, HbA1c = hba1c, "HbA1c mean 5 yrs" = hba1c_mean5yrs, "Total daily insulin"=total_daily_insulin, "Time in range"=TIR, "Diabetes duration" = DD, "SBP" = sysBT, "DBP" = diaBT, Retinopathy = retinopathy, Nephropathy = nephropathy, Smoking = smoking, Alcohol = alcohol, Activity = activity, Pulse = pulse, Diabetes = diabetes,  "Tanner" = tanner, "Hip circumference" = hip, "Waist circumference" = waist, Cholesterol = cholesterol, Triglycerids = triglycerids, "Diabetes and neuropathy status"=DSPN_dia, "Gender (female)" = gender, "Basal insulin" = basal_insulin, "Time in hypoglycemia" = time_hypo, Height = height)
-
-
-t2 <- riskfactor_diab %>% 
-    select("Diabetes and neuropathy status", "Gender (female)", Age, "Diabetes duration", HbA1c, "HbA1c mean 5 yrs", "Time in range", "Time in hypoglycemia", "Basal insulin", "Total daily insulin", BMI, Height, "Hip circumference", "Waist circumference", Tanner, SBP, DBP, Pulse, Retinopathy, Nephropathy, Cholesterol, LDL, HDL, Triglycerids, Alcohol, Smoking, Activity, UENS) %>% 
-    tbl_summary(by = "Diabetes and neuropathy status", missing = "no", statistic = list(all_continuous() ~ "{mean} ({sd})"), type = list("Gender (female)" ~ "dichotomous"), value = list("Gender (female)" ~ "female")) %>%
-    add_p() %>% 
-    modify_header(label ~ "**Variable**") %>% 
-     modify_caption("Table 1. Charateristics of participants with diabetes stratified by neuropathy status") %>% 
-    modify_footnote(update=all_stat_cols() ~ "Mean (SD) for continous; n (%) for categorical") %>%
-    as_flex_table() %>% 
-    footnote(i=1,j=1,part = "header", value = as_paragraph("Abbreviations: HbA1c, Hemoglobin a1c; BMI, body-mass index; SBP, systolic blood pressure; DBP, diastolic blood pressure; HDL, high density lipoproteins; LDL, low density lipoproteins; NI, not indicated"), ref_symbols = "") %>% 
-    theme_zebra(odd_header = "transparent") %>% 
-    fontsize(size= 6 , part = "footer") %>% 
-    bold(bold = FALSE, part = "footer") %>% 
-    fontsize(size=8, part = "header") %>% 
-    fontsize(size=8, part = "body") %>% 
-    line_spacing(space = 0.3, part = "body") %>% 
-    line_spacing(space = 1, part = "footer") %>% 
-    autofit(add_w = 0, add_h = 0)
-
-t2
-```
-
-
-
-
-```{r}
-
-#Merget tabel
 load(here::here("data/diabrisks_2_1.rda"))
 load(here::here("data/riskfactors1.rda"))
 
@@ -99,7 +42,7 @@ t3 <- riskfactor_diab <- rename(diabrisks_2_1, Age = age, HbA1c = hba1c, "HbA1c 
 t3 <- riskfactor_diab %>% 
     select("Diabetes and neuropathy status", "Gender (female)", Age, "Diabetes duration", HbA1c, "HbA1c mean 5 yrs", "Time in range", "Time in hypoglycemia", "Basal insulin", "Total daily insulin", BMI, Height, "Hip circumference", "Waist circumference", Tanner, SBP, DBP, Pulse, Retinopathy, Nephropathy, Cholesterol, LDL, HDL, Triglycerids, Alcohol, Smoking, Activity) %>% 
     tbl_summary(by = "Diabetes and neuropathy status", missing = "no", statistic = list(all_continuous() ~ "{mean} ({sd})"), type = list("Gender (female)" ~ "dichotomous"), value = list("Gender (female)" ~ "female")) %>%
-    add_p() %>% 
+    add_p(na.rm=TRUE, exact = FALSE, correct=FALSE) %>% 
     bold_p(t = 0.05)
 
  
@@ -114,8 +57,7 @@ riskfactors1$smoking <- factor(riskfactors1$smoking,
 
 riskfactors1$alcohol <- factor(riskfactors1$alcohol,
                                levels = c(0,1,2,3,4),
-                               labels = c("0 unit/week", "1-3 units/week", "4-7 units/week", "8-14 units/week", ">15 units/week"))  
-
+                               labels = c("0 unit/week", "1-3 units/week", "4-7 units/week", "8-14 units/week", ">15 units/week"))         
 t4<-riskfactors1 <- rename(riskfactors1, Age = age, HbA1c = hba1c, "Diabetes duration" = DD, "SBP" = sysBT, "DBP" = diaBT, Retinopathy = retinopathy, Nephropathy = nephropathy, Smoking = smoking, Alcohol = alcohol, Activity = activity, Pulse = pulse, Diabetes = diabetes, "Tanner" = tanner, "Hip circumference" = hip, "Waist circumference" = waist, Cholesterol = cholesterol, Triglycerids = triglycerids, Height=height)
 
 t4<-riskfactors1 <- rename(riskfactors1, "Gender (female)" = gender)
