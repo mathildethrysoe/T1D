@@ -1,0 +1,482 @@
+---
+title: "Distribution"
+author: "Mathilde Thrysøe Jespersen"
+date: '2022-04-28'
+output: html_document
+---
+
+```{r}
+
+library(tidyverse)
+
+
+load(here::here("data/risk_control.rda"))
+load(here::here("data/risk_diabetes.rda"))
+
+
+#Tests for control-gruppen:
+#age
+shapiro.test(risk_control$age)
+ggplot(risk_control, aes(sample=age))+
+  geom_qq()+
+  geom_qq_line()
+
+#hba1c
+shapiro.test(risk_control$hba1c)
+ggplot(risk_control, aes(sample=hba1c))+
+  geom_qq()+
+  geom_qq_line()
+
+#BMI
+shapiro.test(risk_control$BMI)
+ggplot(risk_control, aes(sample=BMI))+
+  geom_qq()+
+  geom_qq_line()
+
+#Height
+shapiro.test(risk_control$height)
+ggplot(risk_control, aes(sample=height))+
+  geom_qq()+
+  geom_qq_line()
+
+#hip circumference
+shapiro.test(risk_control$hip)
+ggplot(risk_control, aes(sample=hip))+
+  geom_qq()+
+  geom_qq_line()
+
+#waist
+shapiro.test(risk_control$waist)
+ggplot(risk_control, aes(sample=waist))+
+  geom_qq()+
+  geom_qq_line()
+
+
+#systolic BP
+shapiro.test(risk_control$sysBT)
+ggplot(risk_control, aes(sample=sysBT))+
+  geom_qq()+
+  geom_qq_line()
+
+#diastolic BP
+shapiro.test(risk_control$diaBT)
+ggplot(risk_control, aes(sample=diaBT))+
+  geom_qq()+
+  geom_qq_line()
+
+#pulse 
+shapiro.test(risk_control$pulse)
+ggplot(risk_control, aes(sample=pulse))+
+  geom_qq()+
+  geom_qq_line()
+
+
+#Cholesterol
+shapiro.test(risk_control$cholesterol)
+ggplot(risk_control, aes(sample=cholesterol))+
+  geom_qq()+
+  geom_qq_line()
+
+
+#LDL 
+shapiro.test(risk_control$LDL)
+ggplot(rrisk_control, aes(sample=LDL))+
+  geom_qq()+
+  geom_qq_line()
+
+
+#HDL
+shapiro.test(risk_control$HDL)
+ggplot(risk_control, aes(sample=HDL))+
+  geom_qq()+
+  geom_qq_line()
+
+
+#triglycerids
+shapiro.test(risk_control$triglycerids)
+ggplot(risk_control, aes(sample=triglycerids))+
+  geom_qq()+
+  geom_qq_line()
+
+
+#Tests for diabetes-gruppen:
+
+#age
+shapiro.test(risk_diabetes$age)
+ggplot(risk_diabetes, aes(sample=age))+
+  geom_qq()+
+  geom_qq_line()
+
+#DD
+shapiro.test(risk_diabetes$DD)
+ggplot(risk_diabetes, aes(sample=DD))+
+  geom_qq()+
+  geom_qq_line()
+
+#hba1c
+shapiro.test(risk_diabetes$hba1c)
+ggplot(risk_diabetes, aes(sample=hba1c))+
+  geom_qq()+
+  geom_qq_line()
+
+#BMI
+shapiro.test(risk_diabetes$BMI)
+ggplot(risk_diabetes, aes(sample=BMI))+
+  geom_qq()+
+  geom_qq_line()
+
+#Height
+shapiro.test(risk_diabetes$height)
+ggplot(risk_diabetes, aes(sample=height))+
+  geom_qq()+
+  geom_qq_line()
+
+#hip circumference
+shapiro.test(risk_diabetes$hip)
+ggplot(risk_diabetes, aes(sample=hip))+
+  geom_qq()+
+  geom_qq_line()
+
+#waist circumference
+shapiro.test(risk_diabetes$waist)
+ggplot(risk_diabetes, aes(sample=waist))+
+  geom_qq()+
+  geom_qq_line()
+
+#systolic BP
+shapiro.test(risk_diabetes$sysBT)
+ggplot(risk_diabetes, aes(sample=sysBT))+
+  geom_qq()+
+  geom_qq_line()
+
+#diastolic BP
+shapiro.test(risk_diabetes$diaBT)
+ggplot(risk_diabetes, aes(sample=diaBT))+
+  geom_qq()+
+  geom_qq_line()
+
+#pulse 
+shapiro.test(risk_diabetes$pulse)
+ggplot(risk_diabetes, aes(sample=pulse))+
+  geom_qq()+
+  geom_qq_line()
+
+
+#Cholesterol
+shapiro.test(risk_diabetes$cholesterol)
+ggplot(risk_diabetes, aes(sample=cholesterol))+
+  geom_qq()+
+  geom_qq_line()
+
+
+#LDL 
+shapiro.test(risk_diabetes$LDL)
+ggplot(risk_diabetes, aes(sample=LDL))+
+  geom_qq()+
+  geom_qq_line()
+
+
+#HDL
+shapiro.test(risk_diabetes$HDL)
+ggplot(risk_diabetes, aes(sample=HDL))+
+  geom_qq()+
+  geom_qq_line()
+
+
+#triglycerids
+shapiro.test(risk_diabetes$triglycerids)
+ggplot(risk_diabetes, aes(sample=triglycerids))+
+  geom_qq()+
+  geom_qq_line()
+
+
+#HbA1c mean 
+shapiro.test(risk_diabetes$hba1c_mean5yrs)
+ggplot(risk_diabetes, aes(sample=hba1c_mean5yrs))+
+  geom_qq()+
+  geom_qq_line()
+
+#TIR 
+shapiro.test(risk_diabetes$TIR)
+ggplot(risk_diabetes, aes(sample=TIR))+
+  geom_qq()+
+  geom_qq_line()
+
+#Time in hypoglycemia
+shapiro.test(risk_diabetes$time_hypo)
+ggplot(risk_diabetes, aes(sample=time_hypo))+
+  geom_qq()+
+  geom_qq_line()
+
+
+#basal insulin
+shapiro.test(risk_diabetes$basal_insulin)
+ggplot(risk_diabetes, aes(sample=basal_insulin))+
+  geom_qq()+
+  geom_qq_line()
+
+
+#Total daily insulin
+shapiro.test(risk_diabetes$total_daily_insulin)
+ggplot(risk_diabetes, aes(sample=total_daily_insulin))+
+  geom_qq()+
+  geom_qq_line()
+
+```
+
+```{r}
+
+library(tidyverse)
+load(here::here("data/risk_noneu.rda"))
+load(here::here("data/risk_neu.rda"))
+
+
+
+#Tests for No neuropathy-gruppen:
+
+#age
+shapiro.test(risk_noneu$age)
+ggplot(risk_noneu, aes(sample=age))+
+  geom_qq()+
+  geom_qq_line()
+
+#DD
+shapiro.test(risk_noneu$DD)
+ggplot(risk_noneu, aes(sample=DD))+
+  geom_qq()+
+  geom_qq_line()
+
+#hba1c
+shapiro.test(risk_noneu$hba1c)
+ggplot(risk_noneu, aes(sample=hba1c))+
+  geom_qq()+
+  geom_qq_line()
+
+#BMI
+shapiro.test(risk_noneu$BMI)
+ggplot(risk_noneu, aes(sample=BMI))+
+  geom_qq()+
+  geom_qq_line()
+
+#Height
+shapiro.test(risk_noneu$height)
+ggplot(risk_noneu, aes(sample=height))+
+  geom_qq()+
+  geom_qq_line()
+
+#hip circumference
+shapiro.test(risk_noneu$hip)
+ggplot(risk_noneu, aes(sample=hip))+
+  geom_qq()+
+  geom_qq_line()
+
+#waist circumference
+shapiro.test(risk_noneu$waist)
+ggplot(risk_noneu, aes(sample=waist))+
+  geom_qq()+
+  geom_qq_line()
+
+#systolic BP
+shapiro.test(risk_noneu$sysBT)
+ggplot(risk_noneu, aes(sample=sysBT))+
+  geom_qq()+
+  geom_qq_line()
+
+#diastolic BP
+shapiro.test(risk_noneu$diaBT)
+ggplot(risk_noneu, aes(sample=diaBT))+
+  geom_qq()+
+  geom_qq_line()
+
+#pulse 
+shapiro.test(risk_noneu$pulse)
+ggplot(risk_noneu, aes(sample=pulse))+
+  geom_qq()+
+  geom_qq_line()
+
+
+#Cholesterol
+shapiro.test(risk_noneu$cholesterol)
+ggplot(risk_noneu, aes(sample=cholesterol))+
+  geom_qq()+
+  geom_qq_line()
+
+
+#LDL 
+shapiro.test(risk_noneu$LDL)
+ggplot(risk_noneu, aes(sample=LDL))+
+  geom_qq()+
+  geom_qq_line()
+
+
+#HDL
+shapiro.test(risk_noneu$HDL)
+ggplot(risk_noneu, aes(sample=HDL))+
+  geom_qq()+
+  geom_qq_line()
+
+
+#triglycerids
+shapiro.test(risk_noneu$triglycerids)
+ggplot(risk_noneu, aes(sample=triglycerids))+
+  geom_qq()+
+  geom_qq_line()
+
+
+#HbA1c mean 
+shapiro.test(risk_noneu$hba1c_mean5yrs)
+ggplot(risk_noneu, aes(sample=hba1c_mean5yrs))+
+  geom_qq()+
+  geom_qq_line()
+
+#TIR 
+shapiro.test(risk_noneu$TIR)
+ggplot(risk_noneu, aes(sample=TIR))+
+  geom_qq()+
+  geom_qq_line()
+
+#Time in hypoglycemia
+shapiro.test(risk_noneu$time_hypo)
+ggplot(risk_noneu, aes(sample=time_hypo))+
+  geom_qq()+
+  geom_qq_line()
+
+
+#basal insulin
+shapiro.test(risk_noneu$basal_insulin)
+ggplot(risk_noneu, aes(sample=basal_insulin))+
+  geom_qq()+
+  geom_qq_line()
+
+
+#Total daily insulin
+shapiro.test(risk_noneu$total_daily_insulin)
+ggplot(risk_noneu, aes(sample=total_daily_insulin))+
+  geom_qq()+
+  geom_qq_line()
+
+
+#Tests for Neuropathy-gruppen:
+
+#age
+shapiro.test(risk_neu$age)
+ggplot(risk_neu, aes(sample=age))+
+  geom_qq()+
+  geom_qq_line()
+
+#DD
+shapiro.test(risk_neu$DD)
+ggplot(risk_neu, aes(sample=DD))+
+  geom_qq()+
+  geom_qq_line()
+
+#hba1c
+shapiro.test(risk_neu$hba1c)
+ggplot(risk_neu, aes(sample=hba1c))+
+  geom_qq()+
+  geom_qq_line()
+
+#BMI
+shapiro.test(risk_neu$BMI)
+ggplot(risk_neu, aes(sample=BMI))+
+  geom_qq()+
+  geom_qq_line()
+
+#Height
+shapiro.test(risk_neu$height)
+ggplot(risk_neu, aes(sample=height))+
+  geom_qq()+
+  geom_qq_line()
+
+#hip circumference
+shapiro.test(risk_neu$hip)
+ggplot(risk_neu, aes(sample=hip))+
+  geom_qq()+
+  geom_qq_line()
+
+#waist circumference
+shapiro.test(risk_neu$waist)
+ggplot(risk_neu, aes(sample=waist))+
+  geom_qq()+
+  geom_qq_line()
+
+#systolic BP
+shapiro.test(risk_neu$sysBT)
+ggplot(risk_neu, aes(sample=sysBT))+
+  geom_qq()+
+  geom_qq_line()
+
+#diastolic BP
+shapiro.test(risk_neu$diaBT)
+ggplot(risk_neu, aes(sample=diaBT))+
+  geom_qq()+
+  geom_qq_line()
+
+#pulse 
+shapiro.test(risk_neu$pulse)
+ggplot(risk_neu, aes(sample=pulse))+
+  geom_qq()+
+  geom_qq_line()
+
+
+#Cholesterol
+shapiro.test(risk_neu$cholesterol)
+ggplot(risk_neu, aes(sample=cholesterol))+
+  geom_qq()+
+  geom_qq_line()
+
+
+#LDL 
+shapiro.test(risk_neu$LDL)
+ggplot(risk_neu, aes(sample=LDL))+
+  geom_qq()+
+  geom_qq_line()
+
+
+#HDL
+shapiro.test(risk_neu$HDL)
+ggplot(risk_neu, aes(sample=HDL))+
+  geom_qq()+
+  geom_qq_line()
+
+
+#triglycerids
+shapiro.test(risk_neu$triglycerids)
+ggplot(risk_neu, aes(sample=triglycerids))+
+  geom_qq()+
+  geom_qq_line()
+
+
+#HbA1c mean 
+shapiro.test(risk_neu$hba1c_mean5yrs)
+ggplot(risk_neu, aes(sample=hba1c_mean5yrs))+
+  geom_qq()+
+  geom_qq_line()
+
+#TIR 
+shapiro.test(risk_neu$TIR)
+ggplot(risk_neu, aes(sample=TIR))+
+  geom_qq()+
+  geom_qq_line()
+
+#Time in hypoglycemia
+shapiro.test(risk_neu$time_hypo)
+ggplot(risk_neu, aes(sample=time_hypo))+
+  geom_qq()+
+  geom_qq_line()
+
+
+#basal insulin
+shapiro.test(risk_neu$basal_insulin)
+ggplot(risk_neu, aes(sample=basal_insulin))+
+  geom_qq()+
+  geom_qq_line()
+
+
+#Total daily insulin
+shapiro.test(risk_neu$total_daily_insulin)
+ggplot(risk_neu, aes(sample=total_daily_insulin))+
+  geom_qq()+
+  geom_qq_line()
+```
+

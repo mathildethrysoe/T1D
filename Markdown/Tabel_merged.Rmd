@@ -42,7 +42,7 @@ t3 <- riskfactor_diab <- rename(diabrisks_2_1, Age = age, HbA1c = hba1c, "HbA1c 
 t3 <- riskfactor_diab %>% 
     select("Diabetes and neuropathy status", "Gender (female)", Age, "Diabetes duration", HbA1c, "HbA1c mean 5 yrs", "Time in range", "Time in hypoglycemia", "Basal insulin", "Total daily insulin", BMI, Height, "Hip circumference", "Waist circumference", Tanner, SBP, DBP, Pulse, Retinopathy, Nephropathy, Cholesterol, LDL, HDL, Triglycerids, Alcohol, Smoking, Activity) %>% 
     tbl_summary(by = "Diabetes and neuropathy status", missing = "no", statistic = list(all_continuous() ~ "{mean} ({sd})"), type = list("Gender (female)" ~ "dichotomous"), value = list("Gender (female)" ~ "female")) %>%
-    add_p(na.rm=TRUE, exact = FALSE, correct=FALSE) %>% 
+    add_p(test=list(c("BMI", "Height", "Hip circumference", "SBP", "DBP", "Pulse", "HbA1c mean 5 yrs", "Time in range", "Time in hypoglycemia", "Basal insulin", "Total daily insulin")~"t.test", all_categorical() ~ "fisher.test")) %>% 
     bold_p(t = 0.05)
 
  
@@ -68,7 +68,7 @@ t4<-riskfactors1$Diabetes<- factor(riskfactors1$Diabetes,
 t4<-riskfactors1 %>% 
     select(Diabetes, "Gender (female)", Age, "Diabetes duration", HbA1c, BMI, Height, "Hip circumference", "Waist circumference", Tanner, SBP, DBP, Pulse, Retinopathy, Nephropathy, Cholesterol, LDL, HDL, Triglycerids, Alcohol, Smoking, Activity) %>% 
     tbl_summary(by = Diabetes, missing = "no", statistic = list(all_continuous() ~ "{mean} ({sd})"), type = list("Gender (female)" ~ "dichotomous"), value = list("Gender (female)" ~ "female")) %>% 
-    add_p() %>% 
+    add_p(test=list(c("Height", "BMI", "Hip circumference", "DBP", "Pulse") ~"t.test", all_categorical() ~ "fisher.test")) %>% 
     bold_p(t = 0.05)
 
 
